@@ -1,15 +1,10 @@
-# Basic Sample Hardhat Project
+Application up and running: https://rushank-nft-marketplace.netlify.app/
+Deployed on Ropsten testnet
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+Do not forget to install metamask and get some test ethers from Ropsten faucet.
 
-Try running some of the following tasks:
-
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
-```
+Features:
+- Buy the NFTs listed on marketplace, and resell them at higher price for profits.
+- Create NFT of your ART.
+- Pay listing price(0.025 ETH) to list your NFT on Marketplace.
+- Earn ROYALTIES (2% from seller's profit) from your NFT reselling. 
