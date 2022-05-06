@@ -1,8 +1,8 @@
-Application up and running: https://rushank-nft-marketplace.netlify.app/
+Application up and running: https://rushank-nft-marketplace.netlify.app/<br>
+Connect your wallet to ropsten network and wait for a few seconds, it might show "No NFTs listed yet" before NFTs load. Fund your wallet with some ropsten eth to buy/sell nft.
 
 Deployed on Ropsten testnet: 0xA3b10D635C92a5A1ae051293C26a107c272cc34B
 
-Do not forget to install metamask and get some test ether from Ropsten faucet.
 
 ## Features:
 - Buy the NFTs listed on marketplace, and resell them at higher price for profits.
