@@ -34,7 +34,7 @@ export default function App() {
     const provider = new ethers.providers.JsonRpcProvider()
     const contract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, provider)
     const data = await contract.fetchMarketItems()
-    console.log(data)
+    // console.log(data)
 
     const items = await Promise.all(data.map(async i => { // here i will be the struct containing all the info for a tokenId
 
@@ -58,7 +58,7 @@ export default function App() {
 
     setNfts(items)
     setLoadingState('loaded')
-    console.log(nfts)
+    // console.log(nfts)
   }
 
 
@@ -73,7 +73,7 @@ export default function App() {
     /* user will be prompted to pay the asking proces to complete the transaction */
     const price = ethers.utils.parseUnits(nft.price.toString(), 'ether')
     const transaction = await contract.createMarketSale(nft.tokenId, { value: price })
-    console.log("nft.tokeId")
+    // console.log("nft.tokeId")
     await transaction.wait()
 
     loadNFTs() // running the loadNFTs()  
