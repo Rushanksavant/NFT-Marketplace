@@ -2,6 +2,8 @@ import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from "web3modal"
+// import { fileTypeFromFile } from 'file-type';
+// import toStream from 'it-to-stream'
 
 import NavBar from './routes/NavBar'
 import Grid from './routes/Grid'
@@ -15,7 +17,6 @@ import {
 
 import NFTMarketplace from "./artifacts/contracts/NFTMarket.sol/NFTMarketplace.json";
 
-
 export default function App() {
   const [nfts, setNfts] = useState([])
   const [loadingState, setLoadingState] = useState("not loaded")
@@ -28,9 +29,9 @@ export default function App() {
 
   async function loadNFTs() {
     /* create a generic provider and query for unsold market items */
-    const web3Modal = new Web3Modal()
-    const connection = await web3Modal.connect()
-    const provider = new ethers.providers.Web3Provider(connection)
+    // const web3Modal = new Web3Modal()
+    // const connection = await web3Modal.connect()
+    const provider = new ethers.providers.JsonRpcProvider()
     const contract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, provider)
     const data = await contract.fetchMarketItems()
     console.log(data)
@@ -51,6 +52,7 @@ export default function App() {
         description: meta.data.description,
       }
       return item
+
     }
     ))
 
@@ -77,6 +79,18 @@ export default function App() {
     loadNFTs() // running the loadNFTs()  
   }
 
+  async function nullifyNFT(tokenId) { // to change price of nft to 0 ETH
+    const web3Modal = new Web3Modal()
+    const connection = await web3Modal.connect()
+    const provider = new ethers.providers.Web3Provider(connection)
+    const signer = provider.getSigner()
+    const contract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, signer)
+
+    const transaction = await contract.nullifyToken(tokenId)
+    await transaction.wait()
+    loadNFTs()
+  }
+
 
   if (loadingState !== "loaded" && !nfts.length) return (
     <div>
@@ -96,7 +110,7 @@ export default function App() {
               {
                 nfts.map((nft, i) => (
                   <Card style={{ width: '18rem' }} className="ms-5 me-2 mb-5 bg-dark text-white" key={i}>
-                    <Card.Img variant="top" src={nft.image} className="p-3" />
+                    <Card.Img variant="top" src={nft.image} className="p-3" alt="not an image" />
                     <Card.Body>
                       <Card.Title>{nft.name}</Card.Title>
                       <Card.Text>
@@ -106,6 +120,7 @@ export default function App() {
                         {nft.price} ETH
                       </Card.Text>
                       <Button variant="danger" onClick={() => buyNFT(nft)}>Buy</Button>
+                      <Button variant="dark text-dark" onClick={() => nullifyNFT(nft.tokenId)}>Nullify</Button>
                     </Card.Body>
                   </Card>
                 ))

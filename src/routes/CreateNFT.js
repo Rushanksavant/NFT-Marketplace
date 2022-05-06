@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from 'react'
 import { ethers } from 'ethers'
 import { create as ipfsHttpClient } from 'ipfs-http-client'
-// import { useRouter } from 'next/router'
+
 import Web3Modal from 'web3modal'
 
 import NavBar from './NavBar'
@@ -20,7 +20,6 @@ const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0') // ipfs clie
 export default function CreateNFT() {
     const [fileUrl, setFileUrl] = useState(null)
     const [formInput, updateFormInput] = useState({ price: '', name: '', description: '' })
-    // const router = useRouter()
 
 
     // to upload file on ipfs:
@@ -37,7 +36,7 @@ export default function CreateNFT() {
     }
 
 
-    // create an item and save to ipfs:
+    // create an item (tokenURI, which will be input to createToken) and save to ipfs:
     async function uploadToIPFS() {
         const { name, description, price } = formInput
         if (!name || !description || !price || !fileUrl) return
@@ -51,7 +50,7 @@ export default function CreateNFT() {
             const url = `https://ipfs.infura.io/ipfs/${added.path}` // getting uploaded data location
 
             /* after file is uploaded to IPFS, return the URL to use it in the transaction */
-            return url
+            return url // tokenURI
 
         } catch (error) {
             console.log('Error uploading file: ', error)
@@ -81,8 +80,6 @@ export default function CreateNFT() {
         await transaction.wait()
 
         window.location.reload(true); // refresh page
-
-        // router.push('/')
     }
 
 
@@ -90,39 +87,6 @@ export default function CreateNFT() {
     return (
         <div>
             <NavBar />
-            {/* <div className="flex justify-center">
-                <div className="w-1/2 flex flex-col pb-12">
-                    <input
-                        placeholder="Asset Name"
-                        className="mt-8 border rounded p-4"
-                        onChange={e => updateFormInput({ ...formInput, name: e.target.value })}
-                    />
-                    <textarea
-                        placeholder="Asset Description"
-                        className="mt-2 border rounded p-4"
-                        onChange={e => updateFormInput({ ...formInput, description: e.target.value })}
-                    />
-                    <input
-                        placeholder="Asset Price in Eth"
-                        className="mt-2 border rounded p-4"
-                        onChange={e => updateFormInput({ ...formInput, price: e.target.value })}
-                    />
-                    <input
-                        type="file"
-                        name="Asset"
-                        className="my-4"
-                        onChange={onChange}
-                    />
-                    {
-                        fileUrl && (
-                            <img className="rounded mt-4" width="350" src={fileUrl} />
-                        )
-                    }
-                    <button onClick={listNFTForSale} className="font-bold mt-4 bg-pink-500 text-white rounded p-4 shadow-lg">
-                        Create NFT
-                    </button>
-                </div>
-            </div> */}
 
 
             <Form className="creat-nft mt-5 ms-5 me-5 pe-5 ps-5 pt-1 text-danger">
@@ -153,7 +117,7 @@ export default function CreateNFT() {
 
                 {
                     fileUrl ? (
-                        <img className="" width="350" src={fileUrl} /> // preview file if fileUrl exists
+                        <img className="" width="350" src={fileUrl} alt="not an image" /> // preview file if fileUrl exists
                     ) : console.log("No file URL")
                 }
                 {

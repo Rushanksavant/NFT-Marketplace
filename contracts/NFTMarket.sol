@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity 0.8.1;
 
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
@@ -178,6 +178,12 @@ contract NFTMarketplace is ERC721URIStorage {
         _itemsSold.decrement();
 
         _transfer(msg.sender, address(this), tokenId);
+    }
+
+    // delete token
+    function nullifyToken(uint256 tokenId) external {
+        require(msg.sender == owner, "Only owner can delete");
+        idToMarketItem[tokenId].price = 0;
     }
 
     /* Returns all unsold market items */

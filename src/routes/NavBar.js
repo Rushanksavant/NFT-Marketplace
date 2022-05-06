@@ -5,7 +5,7 @@ import { Navbar, Container, Nav } from 'react-bootstrap';
 
 export default function NavBar() {
 
-    // blank
+
 
     return (
         <Navbar bg="dark" variant="dark">
