@@ -2,7 +2,7 @@ Application up and running: https://rushank-nft-marketplace.netlify.app/
 
 Deployed on Ropsten testnet: 0xA3b10D635C92a5A1ae051293C26a107c272cc34B
 
-Do not forget to install metamask and get some test ethers from Ropsten faucet.
+Do not forget to install metamask and get some test ether from Ropsten faucet.
 
 ## Features:
 - Buy the NFTs listed on marketplace, and resell them at higher price for profits.
