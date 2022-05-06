@@ -70,3 +70,12 @@ Do not forget to install metamask and get some test ether from Ropsten faucet.
   - function fetchItemsListed() public view returns (MarketItem[] memory) {}
     - to get all tokens created by an address
 
+## What's for V2.0?
+- Fractionalized NFTs
+- Improved Frontend
+- Energized NFTs
+- Collection listing
+- Transfer NFT to wallet
+- NFT activity log
+- Video NFTs
+- and more...
