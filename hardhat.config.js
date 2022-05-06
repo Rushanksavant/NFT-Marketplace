@@ -3,24 +3,6 @@ require("@nomiclabs/hardhat-waffle")
 const dotenv = require("dotenv");
 dotenv.config();
 
-// module.exports = {
-//   defaultNetwork: "hardhat",
-//   networks: {
-//     hardhat: {
-//       chainId: 1337
-//     },
-
-//   },
-//   solidity: {
-//     version: "0.8.4",
-//     settings: {
-//       optimizer: {
-//         enabled: true,
-//         runs: 200
-//       }
-//     }
-//   }
-// }
 module.exports = {
   defaultNetwork: "hardhat",
   paths: {
@@ -35,5 +17,5 @@ module.exports = {
       accounts: [process.env.KEY]
     },
   },
-  solidity: "0.8.4",
+  solidity: "0.8.1",
 };
