@@ -1,16 +1,23 @@
 Application up and running: https://rushank-nft-marketplace.netlify.app/
-Deployed on Ropsten testnet
+
+Deployed on Ropsten testnet: 0xA3b10D635C92a5A1ae051293C26a107c272cc34B
 
 Do not forget to install metamask and get some test ethers from Ropsten faucet.
 
-Features:
+## Features:
 - Buy the NFTs listed on marketplace, and resell them at higher price for profits.
 - Create NFT of your ART.
 - Pay listing price(0.025 ETH) to list your NFT on Marketplace.
 - Earn ROYALTIES (2% from seller's profit) from your NFT reselling. 
 
 
-Solidity Contract:
+## Frontend:
+- Home- will show all nfts listed for sale
+- Create NFT- to create your token
+- My NFTs- will display all the nfts owned by you
+- My Creation- will display all the nfts you created with their latest selling price
+
+## Solidity Contract:
 - Dependencies used:
   1. @openzeppelin/contracts/utils/Counters.sol
     To track the tokens minted and sold on the marketpalce.
@@ -33,9 +40,33 @@ Solidity Contract:
 
 - Functions:
   - function createToken(string memory tokenURI, uint256 price) public payable returns (uint256) {}
+     - Mint new token
+     - set URI for the token
+     - add token as a market item by modifying state variable (uses createMarketItem())
+  
   - function createMarketItem(uint256 tokenId, uint256 price) private {}
+     - make changes to the state variables to store all token info
+     - transfer token from creator to contract address
+     - charges 0.025 ETH as listing fee
+     - list nft 
+
   - function createMarketSale(uint256 tokenId) public payable {}
+    - calculate royalty (if not first time sell), and send it to creator
+    - transfer token from contract address to buyer
+    - modify state variables
+
   - function resellToken(uint256 tokenId, uint256 price) public payable {}
+    - to list a token (bought before) for sale
+    - charges 0.025 ETH as listing fee
+    - transfers nft from owner to contract address
+    - modify state variables
+
   - function fetchMarketItems() public view returns (MarketItem[] memory) {}
+    - to get all tokens which are listed for sale
+
   - function fetchMyNFTs() public view returns (MarketItem[] memory) {}
+    - to get all tokens owned my an address
+
   - function fetchItemsListed() public view returns (MarketItem[] memory) {}
+    - to get all tokens created by an address
+
