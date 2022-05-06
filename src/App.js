@@ -29,9 +29,9 @@ export default function App() {
 
   async function loadNFTs() {
     /* create a generic provider and query for unsold market items */
-    // const web3Modal = new Web3Modal()
-    // const connection = await web3Modal.connect()
-    const provider = new ethers.providers.JsonRpcProvider()
+    const web3Modal = new Web3Modal()
+    const connection = await web3Modal.connect()
+    const provider = new ethers.providers.Web3Provider(connection)
     const contract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, provider)
     const data = await contract.fetchMarketItems()
     // console.log(data)
